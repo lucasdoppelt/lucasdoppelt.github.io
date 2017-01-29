@@ -1,0 +1,75 @@
+<html class="a-html">
+  <head>
+  <meta charset="utf-8">
+    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@3.x.x/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+	<script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+	<script src="components/set-image.js"></script>
+	<script src="components/update-raycaster.js"></script>
+  
+
+	
+  </head>
+   <body>
+    <a-scene>
+		<a-assets>
+		
+	<img id="sky" crossorigin="anonymous" src="images/sky.jpg">
+	<img id="reunion" crossorigin="anonymous" src="images/reunion.jpg">
+	<img id="bar" crossorigin="anonymous" src="images/bar.jpg">
+	<img id="bedroom" crossorigin="anonymous" src="images/bedroom.jpg">
+	<img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+	<img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+	<img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+	
+	<script id="plane" type="text/nunjucks">
+		<a-plane class="link"
+       height: "1"; width: "1"
+      material="shader: flat; src: {{thumb}}"
+	  event-set__1="_event: mousedown; scale: 1 1 1"
+      event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+      event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+      event-set__4="_event: mouseleave; scale: 1 1 1"
+	  update-raycaster="#cursor"
+	  set-image="on: click; target: #image-360; src: {{src }}"
+	  
+      ></a-plane>
+  </script> 
+	
+	</a-assets>
+
+<a-sky id="image-360" src="#reunion" data-set-image-fade-setup="true" animation_fade></a-sky>  
+	
+<a-entity id="links" layout="layout: line; margin: 3" position="-3 1 -4">	
+<a-entity template="src: #link" data-thumb="#cubes-thumb" data-src="#bar">
+
+</a-entity>
+
+<a-entity template="src: #link" data-thumb="#sechelt-thumb" data-src="#bedroom"></a-entity>
+<a-entity template="src: #link" data-thumb="#city-thumb" data-src="#sky"></a-entity>
+
+</a-entity>
+	 	
+	 
+	 
+  
+  <!-- Camera + Cursor. -->
+  <a-camera>
+    <a-cursor id="cursor">
+      <a-animation begin="click" easing="ease-in" attribute="scale"
+                   fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+      <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+                   from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+    </a-cursor>
+  </a-camera>
+
+  
+
+  </a-scene>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+  </body>
+</html>
+
